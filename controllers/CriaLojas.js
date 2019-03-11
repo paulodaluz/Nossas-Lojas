@@ -1,6 +1,13 @@
-import { CriaLojaModel } from "../models/CriaLojaModel";
 
 module.exports = function (app) {
+
+    const erroPadrao = [{
+        "errorCode": "400",
+        "msg": ""
+    }]
+
+
+
     app.post("/criaLoja", function (req, res) {
         var loja = req.body;
         console.log('processando aguarde...');
@@ -17,7 +24,8 @@ module.exports = function (app) {
 
         if (errors) {
             console.log("Erros de validação encontrados");
-            res.status(400).send(errors);
+            erroPadrao[0].msg = errors[0].msg
+            res.status(400).json(erroPadrao);
             return;
         }
         console.log('criando loja...');
@@ -45,13 +53,21 @@ module.exports = function (app) {
         var connection = app.persistencia.connectionFactory();
         var lojaDao = new app.persistencia.LojaDao(connection);
 
-        lojaDao.altera(loja, function (erro) {
+        lojaDao.altera(loja, function (erro, result) {
             if (erro) {
-                res.status(500).send(erro);
+                erroPadrao[0].msg = "Erro no servidor";
+                res.status(500).json(erroPadrao);
                 return;
             }
-            console.log('Loja alterada');
-            res.send(loja);
+            if (result.affectedRows > 0) {
+                console.log('Loja alterada');
+                res.status(204).send(loja);
+            } else {
+                console.log("Loja não encontrada")
+                erroPadrao[0].msg = "Loja não encontrada, confira seus dados e tente novamente";
+                erroPadrao[0].errorCode = 400
+                res.status(400).json(erroPadrao);
+            }    
         });
 
     });
@@ -65,16 +81,18 @@ module.exports = function (app) {
 
         lojaDao.deleta(id, function (erro , result) {
             if (erro) {
-                console.log("Erro ao deletar a loja, tente novamente mais tarde")
-                res.status(500).send(erro);
+                erroPadrao[0].msg = "Erro no servidor"
+                erroPadrao[0].errorCode = 500
+                res.status(500).json(erroPadrao);
                 return;
             }
             if (result.affectedRows > 0) {
                 console.log('Loja deletada');
                 res.status(204).send();
             } else {
-                console.log("Loja não encontrada, confira seus dados e tente novamente")
-                res.status(400).send();
+                console.log("Loja não encontrada")
+                erroPadrao[0].msg = "Loja não encontrada, confira seus dados e tente novamente";
+                res.status(400).json(erroPadrao);
             }
 
         });
@@ -90,11 +108,21 @@ module.exports = function (app) {
 
         lojaDao.buscaPorId(id, function (erro , resultado) {
             if (erro) {
-                res.status(500).send(erro);
+                erroPadrao[0].msg = "Erro no servidor";
+                erroPadrao[0].errorCode = 500
+                res.status(500).json(erroPadrao);
                 return;
             }
-            console.log("Loja com o id" + id);
-            res.json(resultado);
+            if (resultado.length > 0) {
+                console.log("Loja com o id " + id + "foi mostrada ao usuário");
+                res.json(resultado);
+
+            } else {
+
+                console.log("Loja não encontrada")
+                erroPadrao[0].msg = "Loja não encontrada, confira seus dados e tente novamente";
+                res.status(400).json(erroPadrao);
+            }
         });
     });
 
@@ -109,11 +137,21 @@ module.exports = function (app) {
 
         lojaDao.buscaEstadoEUmaCidade(estado, cidadeA, function (erro, resultado) {
             if (erro) {
-                res.status(500).send(erro);
+                erroPadrao[0].msg = "Erro no servidor";
+                erroPadrao[0].errorCode = 500;
+                res.status(500).json(erroPadrao);
                 return;
             }
-            console.log("Lojas do estado de " + estado + " e da cidade de " + cidadeA);
-            res.json(resultado);
+            if (resultado.length > 0) {
+                console.log("Lojas do estado de " + estado + " e da cidade de " + cidadeA);
+                res.json(resultado);
+
+            } else {
+
+                console.log("Lojas não encontradas")
+                erroPadrao[0].msg = "Lojas não encontradas, confira seus dados e tente novamente";
+                res.status(400).json(erroPadrao);
+            }
         });
     });
 
@@ -130,11 +168,22 @@ module.exports = function (app) {
 
         lojaDao.buscaEstadoEDuasCidades(estado, cidadeA, cidadeB, function (erro, resultado) {
             if (erro) {
-                res.status(500).send(erro);
+                erroPadrao[0].msg = "Erro no servidor";
+                erroPadrao[0].errorCode = 500;
+                res.status(500).json(erroPadrao);
                 return;
             }
-            console.log("Lojas do estado de " + estado + " das cidades de " + cidadeA + "," + cidadeB);
-            res.json(resultado);
+
+            if (resultado.length > 0) {
+                console.log("Lojas do estado de " + estado + " das cidades de " + cidadeA + "," + cidadeB);
+                res.json(resultado);
+
+            } else {
+
+                console.log("Lojas não encontradas")
+                erroPadrao[0].msg = "Lojas não encontradas, confira seus dados e tente novamente";
+                res.status(400).json(erroPadrao);
+            }
         });
     });
 
@@ -152,11 +201,20 @@ module.exports = function (app) {
 
         lojaDao.buscaEstadoETresCidades(estado, cidadeA, cidadeB, cidadeC, function (erro, resultado) {
             if (erro) {
-                res.status(500).send(erro);
+                erroPadrao[0].msg = "Erro no servidor";
+                erroPadrao[0].errorCode = 500;
+                res.status(500).json(erroPadrao);
                 return;
             }
-            console.log("Lojas do estado de " + estado + " das cidades de " + cidadeA + "," + cidadeB + "," + cidadeC);
-            res.json(resultado);
+            if (resultado.length > 0) {
+                console.log("Lojas do estado de " + estado + " das cidades de " + cidadeA + "," + cidadeB + "," + cidadeC);
+                res.json(resultado);
+            } else {
+
+                console.log("Lojas não encontradas")
+                erroPadrao[0].msg = "Lojas não encontradas, confira seus dados e tente novamente";
+                res.status(400).json(erroPadrao);
+            }
         });
     });
 
@@ -169,11 +227,19 @@ module.exports = function (app) {
 
         lojaDao.BuscaEstado(estado, function (erro, resultado) {
             if (erro) {
-                res.status(500).send(erro);
+                erroPadrao[0].msg = "Erro no servidor";
+                erroPadrao[0].errorCode = 500;
+                res.status(500).json(erroPadrao);
                 return;
+
+            } if (resultado.length > 0) {
+                console.log("Lojas do estado de " + estado);
+                res.json(resultado);
+            } else {
+                console.log("Lojas não encontradas")
+                erroPadrao[0].msg = "Lojas não encontradas, confira seus dados e tente novamente";
+                res.status(400).json(erroPadrao);
             }
-            console.log("Lojas do estado de " + estado);
-            res.json(resultado);
         });
     });
 
@@ -185,11 +251,21 @@ module.exports = function (app) {
 
         lojaDao.listaTodos(function (erro, resultado) {
             if (erro) {
-                res.status(500).send(erro);
+                Console.log("Erro no servidor");
+                erroPadrao[0].msg = "Erro no servidor";
+                erroPadrao[0].errorCode = 500;
+                res.status(500).json(erroPadrao);
                 return;
-            }
+            } 
+            if (resultado.length > 0) {
             console.log("Todas as lojas foram listadas");
             res.json(resultado);
+            } else {
+                console.log("Lojas encontradas");
+                erroPadrao[0].msg = "Nenhuma loja foi criada até o momento";
+                erroPadrao[0].errorCode = 200;
+                res.status(200).json(erroPadrao);
+            }
         });
     });
 }
