@@ -61,7 +61,7 @@ module.exports = function (app) {
             }
             if (result.affectedRows > 0) {
                 console.log('Loja alterada');
-                res.status(204).send(loja);
+                res.json(loja);
             } else {
                 console.log("Loja não encontrada")
                 erroPadrao[0].msg = "Loja não encontrada, confira seus dados e tente novamente";
@@ -88,7 +88,7 @@ module.exports = function (app) {
             }
             if (result.affectedRows > 0) {
                 console.log('Loja deletada');
-                res.status(204).send();
+                res.json("Loja deletada com sucesso");
             } else {
                 console.log("Loja não encontrada")
                 erroPadrao[0].msg = "Loja não encontrada, confira seus dados e tente novamente";
