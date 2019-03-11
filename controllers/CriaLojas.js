@@ -1,8 +1,9 @@
+import { CriaLojaModel } from "../models/CriaLojaModel";
+
 module.exports = function (app) {
     app.post("/criaLoja", function (req, res) {
         var loja = req.body;
         console.log('processando aguarde...');
-
 
         req.assert("nome_loja", "Nome da loja é obrigatório.").notEmpty();
         req.assert("endereco", "Endereço da loja é obrigatório.").notEmpty();
@@ -30,8 +31,9 @@ module.exports = function (app) {
             console.log('Loja criada: ' + result);
 
             res.status(201).json(loja);
+        })
     })
-})
+
 
     app.put('/editaLoja/:id', function (req, res) {
 
@@ -53,6 +55,7 @@ module.exports = function (app) {
         });
 
     });
+
 
     app.delete('/deletaLoja/:id', function (req, res) {
         var id = req.params.id;
@@ -93,23 +96,99 @@ module.exports = function (app) {
             console.log("Loja com o id" + id);
             res.json(resultado);
         });
-});
+    });
 
 
-
-    app.get('/buscaEstadoeCidade/:estado/:cidade', function (req, res) {
+    app.get('/buscaEstadoeCidade/:estado/:cidadeA', function (req, res) {
+        
         var estado = req.params.estado;
-        var cidade = req.params.cidade;
+        var cidadeA = req.params.cidadeA;
 
         var connection = app.persistencia.connectionFactory();
         var lojaDao = new app.persistencia.LojaDao(connection);
 
-        lojaDao.buscaEstadoECidade(estado, cidade, function (erro, resultado) {
+        lojaDao.buscaEstadoEUmaCidade(estado, cidadeA, function (erro, resultado) {
             if (erro) {
                 res.status(500).send(erro);
                 return;
             }
-            console.log("Lojas do estado de " + estado + "E da cidade de" + cidade);
+            console.log("Lojas do estado de " + estado + " e da cidade de " + cidadeA);
+            res.json(resultado);
+        });
+    });
+
+
+    app.get('/buscaEstadoeCidade/:estado/:cidadeA/:cidadeB', function (req, res) {
+
+        var estado = req.params.estado;
+        var cidadeA = req.params.cidadeA;
+        var cidadeB = req.params.cidadeB;
+
+
+        var connection = app.persistencia.connectionFactory();
+        var lojaDao = new app.persistencia.LojaDao(connection);
+
+        lojaDao.buscaEstadoEDuasCidades(estado, cidadeA, cidadeB, function (erro, resultado) {
+            if (erro) {
+                res.status(500).send(erro);
+                return;
+            }
+            console.log("Lojas do estado de " + estado + " das cidades de " + cidadeA + "," + cidadeB);
+            res.json(resultado);
+        });
+    });
+
+
+    app.get('/buscaEstadoeCidade/:estado/:cidadeA/:cidadeB/:cidadeC', function (req, res) {
+
+        var estado = req.params.estado;
+        var cidadeA = req.params.cidadeA;
+        var cidadeB = req.params.cidadeB;
+        var cidadeC = req.params.cidadeC;
+
+
+        var connection = app.persistencia.connectionFactory();
+        var lojaDao = new app.persistencia.LojaDao(connection);
+
+        lojaDao.buscaEstadoETresCidades(estado, cidadeA, cidadeB, cidadeC, function (erro, resultado) {
+            if (erro) {
+                res.status(500).send(erro);
+                return;
+            }
+            console.log("Lojas do estado de " + estado + " das cidades de " + cidadeA + "," + cidadeB + "," + cidadeC);
+            res.json(resultado);
+        });
+    });
+
+
+    app.get('/buscaEstado/:estado', function (req, res) {
+        var estado = req.params.estado;
+
+        var connection = app.persistencia.connectionFactory();
+        var lojaDao = new app.persistencia.LojaDao(connection);
+
+        lojaDao.BuscaEstado(estado, function (erro, resultado) {
+            if (erro) {
+                res.status(500).send(erro);
+                return;
+            }
+            console.log("Lojas do estado de " + estado);
+            res.json(resultado);
+        });
+    });
+
+
+    app.get('/listaLojas', function (req, res) {
+
+        var connection = app.persistencia.connectionFactory();
+        var lojaDao = new app.persistencia.LojaDao(connection);
+
+        lojaDao.listaTodos(function (erro, resultado) {
+            if (erro) {
+                res.status(500).send(erro);
+                return;
+            }
+            console.log("Todas as lojas foram listadas");
             res.json(resultado);
         });
     });
