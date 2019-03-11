@@ -1,0 +1,231 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: 'localhost:8085'
+basePath: /nossas-lojas/v1
+info:
+  version: 1.0.0
+  title: Nossas Lojas
+  description: Guarda informações de lojas físicas de um e-commerce.
+  termsOfService: 'http://localhost:8085/nossas-lojas/v1/termo-uso'
+  contact:
+    name: Suporte
+    url: 'http://localhost:8085/nossas-lojas/v1/suporte'
+    email: suporte@nossaslojas.com
+securityDefinitions:
+  BasicAuth:
+    type: basic
+security:
+  - BasicAuth: []
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: Cadastra Loja
+  - name: Edita Loja
+  - name: Deleta Loja
+  - name: Busca Loja
+paths:
+  /criaLoja:
+    post:
+      tags:
+        - Cadastra Loja
+      summary: Cadastra Loja
+      description: Cadastra uma nova Loja
+      operationId: cadastraLoja
+      parameters:
+        - in: path
+          name: nome_loja
+          type: string
+          required: true
+        - in: path
+          name: endereco
+          type: string
+          required: true
+        - in: path
+          name: celular
+          type: integer
+          format: int64
+          required: true
+        - in: path
+          name: cnpj
+          type: string
+          required: true
+        - in: path
+          name: horárioDeTrabalho
+          type: string
+          required: true
+        - in: path
+          name: cidade
+          type: string
+          required: true
+        - in: path
+          name: estado
+          type: string
+          required: true
+      responses:
+        '201':
+          description: Loja criada com sucesso.
+          schema:
+            $ref: '#/definitions/Loja'
+        '400':
+          description: Erros de validação encontrados.
+        '500':
+          description: Erro interno no servidor.
+  '/editaLoja/{id}':
+    put:
+      tags:
+        - Edita Loja
+      summary: Altera a loja.
+      description: Edita uma loja existente.
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+        - in: path
+          name: nome_loja
+          type: string
+          required: true
+        - in: path
+          name: endereco
+          type: string
+          required: true
+        - in: path
+          name: celular
+          type: integer
+          format: int64
+          required: true
+        - in: path
+          name: cnpj
+          type: string
+          required: true
+        - in: path
+          name: horárioDeTrabalho
+          type: string
+          required: true
+        - in: path
+          name: cidade
+          type: string
+          required: true
+        - in: path
+          name: estado
+          type: string
+          required: true
+      responses:
+        '201':
+          description: Loja criada com sucesso
+          schema:
+            $ref: '#/definitions/Loja'
+        '400':
+          description: ID inválido.
+        '500':
+          description: Erro no servidor.
+  /deletaLoja:
+    delete:
+      tags:
+        - Deleta Loja
+      summary: Exclui uma loja
+      description: Exclui uma loja existente.
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        '204':
+          description: Exclusão efetuada com sucesso.
+        '400':
+          description: Requisição inválida.
+        '404':
+          description: ID não encontrado.
+        '500':
+          description: Erro no servidor.
+  '/buscaId/{id}':
+    get:
+      tags:
+        - Busca Loja
+      summary: Busca Loja por ID
+      description: Consulta o saldo da conta do cliente.
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        '200':
+          description: Consulta a ID efetuada com sucesso.
+          schema:
+            $ref: '#/definitions/Loja'
+        '400':
+          description: Requisição inválida.
+        '404':
+          description: ID não encontrado.
+        '500':
+          description: Erro no servidor.
+  '/buscaEstadoeCidade/{estado}/{cidade}':
+    get:
+      tags:
+        - Busca Loja
+      summary: Busca loja por Estado e Cidade
+      description: Busca lojas pelo estado e em conjunto com a cidade.
+      parameters:
+        - in: path
+          name: estado
+          type: string
+          required: true
+        - in: path
+          name: cidade
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Consulta a estado efetuada com sucesso.
+          schema:
+            $ref: '#/definitions/Loja'
+        '400':
+          description: Requisição inválida.
+        '404':
+          description: Esse estado ou loja não foi encontrado.
+        '500':
+          description: Erro no servidor.
+definitions:
+  Loja:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 234
+      nome_loja:
+        type: string
+        example: Doce Mania
+      endereco:
+        type: string
+        example: 'Av. Brasil Oeste, 623'
+      celular:
+        type: number
+        minLength: 10
+        maxLength: 12
+        example: 5433134549
+      cnpj:
+        type: string
+        minLength: 18
+        maxLength: 18
+        example: 02.847.070.0001-05
+      horarioDeTrabalho:
+        type: string
+        example: Diariamente das 8hs às 18hs
+      cidade:
+        type: string
+        example: Passo Fundo
+      estado:
+        type: string
+        minLength: 2
+        maxLength: 2
+        example: RS

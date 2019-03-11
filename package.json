@@ -1,0 +1,34 @@
+{
+  "name": "semi-tcc",
+  "version": "1.0.0",
+  "description": "Informações de um e-comerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulodaluz/SemiTcc.git"
+  },
+  "keywords": [
+    "agenda",
+    "e-comerce"
+  ],
+  "author": "Paulo da Luz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulodaluz/SemiTcc/issues"
+  },
+  "homepage": "https://github.com/paulodaluz/SemiTcc#readme",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "mysql": "^2.16.0",
+    "save": "^2.3.3",
+    "nodemon": "1.18.4"
+  }
+}
