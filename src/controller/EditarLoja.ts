@@ -9,11 +9,16 @@ export async function EditaLoja(request: Request, response: Response) {
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
 
     // load a post by a given post id
-    const loja = await ListaLojasRepository.update({id: request.params.id}, request.body);
+    const loja = await ListaLojasRepository.findOne(request.params.id);
+    await ListaLojasRepository.update({ id: request.params.id }, request.body);
 
+    const erroPadrao = [{
+        "errorCode": "400",
+        "msg": "Erro na requisição, loja inexistente, verifique os dados e tente novamente."
+    }]
     // if post was not found return 404 to the client
     if (!loja) {
-        response.status(404);
+        response.status(404).json(erroPadrao);
         response.end();
         return;
     }

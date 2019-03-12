@@ -16,10 +16,13 @@ export async function BuscaEstado(request: Request, response: Response) {
             estado: request.params.estado
         }
     });
-
+    const erroPadrao = [{
+        "errorCode": "400",
+        "msg": "Erro na requisição, lojas inexistentes, verifique os dados e tente novamente."
+    }]
     // if post was not found return 404 to the client
-    if (!loja) {
-        response.status(404);
+    if (loja.length == 0) {
+        response.status(404).json(erroPadrao);
         response.end();
         return;
     }
