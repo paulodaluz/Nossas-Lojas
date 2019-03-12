@@ -27,6 +27,7 @@ tags:
   - name: Edita Loja
   - name: Deleta Loja
   - name: Busca Loja
+  - name: Lista Lojas
 paths:
   /criaLoja:
     post:
@@ -168,12 +169,12 @@ paths:
           description: ID não encontrado.
         '500':
           description: Erro no servidor.
-  '/buscaEstadoeCidade/{estado}/{cidade}':
+  '/buscaEstadoeCidade/{estado}/{cidade}/{cidade}/{cidade}':
     get:
       tags:
         - Busca Loja
       summary: Busca loja por Estado e Cidade
-      description: Busca lojas pelo estado e em conjunto com a cidade.
+      description: Busca lojas por um estado e em conjunto com até três cidades.
       parameters:
         - in: path
           name: estado
@@ -192,6 +193,50 @@ paths:
           description: Requisição inválida.
         '404':
           description: Esse estado ou loja não foi encontrado.
+        '500':
+          description: Erro no servidor.
+  '/buscaEstado/{estado}':
+    get:
+      tags:
+        - Busca Loja
+      summary: Busca loja por Estado
+      description: Listar todas as lojas de um estado.
+      parameters:
+        - in: path
+          name: estado
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Consulta a estado efetuada com sucesso.
+          schema:
+            $ref: '#/definitions/Loja'
+        '400':
+          description: Requisição inválida.
+        '404':
+          description: Esse estado ou loja não foi encontrado.
+        '500':
+          description: Erro no servidor.
+  '/listaLojas':
+    get:
+      tags:
+        - Lista Lojas
+      summary: Lista todas as lojas cadastradas no banco de dados.
+      description: Listar todas as lojas de um estado.
+      parameters:
+        - in: path
+          name: estado
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Consulta a estado efetuada com sucesso.
+          schema:
+            $ref: '#/definitions/Loja'
+        '204':
+          description: Nenhuma loja foi cadastrada.
+        '400':
+          description: Requisição inválida.
         '500':
           description: Erro no servidor.
 definitions:

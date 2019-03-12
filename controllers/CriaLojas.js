@@ -263,7 +263,7 @@ module.exports = function (app) {
             } else {
                 console.log("Lojas encontradas");
                 erroPadrao[0].msg = "Nenhuma loja foi criada até o momento";
-                erroPadrao[0].errorCode = 200;
+                erroPadrao[0].errorCode = 204;
                 res.status(200).json(erroPadrao);
             }
         });
