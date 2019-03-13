@@ -63,7 +63,7 @@ module.exports = function () {
   Para testar, fazer consultas você deverá utilizar o app ```Postman```.
  Antes de fazer os testes a seguir você deverá executar o seguinte processo:
 
- - Entrar na pasta do projeto no termina;
+ - Entrar na pasta do projeto no terminal;
  - Botar para rodar a aplicação com o comando ```nodemon index.js```.
  - É recomendado tambem estár com o MySQL aberto para poder ver as alterações no banco de dados.
  
@@ -151,9 +151,9 @@ module.exports = function () {
 E você irá perceber que retornou no Body as informações da(s) loja(s) cujo o ```Estado``` e a(s) ```Cidades``` correspondentes ao que foi passado.
   
   
-  ### Listar Todas as Lojas:
-  Para listar todas as lojas, você deverá selecionar o método ```GET``` no ```Postman``` e deverá:
-   - Inserir a URL: http://localhost:3000/listaLojas .
+ ### Listar Todas as Lojas:
+ Para listar todas as lojas, você deverá selecionar o método ```GET``` no ```Postman``` e deverá:
+  - Inserir a URL: http://localhost:3000/listaLojas .
    
 E você irá perceber que retornou no Body todas as lojas cadastradas no banco de dados.
    
