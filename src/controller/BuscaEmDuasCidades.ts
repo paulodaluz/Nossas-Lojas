@@ -5,10 +5,10 @@ import { ListaLojas } from "../entity/ListaLojas"
 
 export async function BuscaEmDuasCidades(request: Request, response: Response) {
 
-    // get a post repository to perform operations with post
+    //Cria uma conexão com o banco
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
 
-    // load a post by a given post id
+    //Procurando no banco de dados e guardando dentro da variavel
     const loja = await ListaLojasRepository.find({
         where: [
             {estado: request.params.estado, cidade: request.params.cidadeA},

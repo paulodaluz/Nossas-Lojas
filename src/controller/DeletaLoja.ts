@@ -5,10 +5,10 @@ import { ListaLojas } from "../entity/ListaLojas"
 
 export async function DeletaLoja(request: Request, response: Response) {
 
-    // get a post repository to perform operations with post
+    //Cria uma conexão com o banco
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
 
-    // load a post by a given post id
+    //Acha a loja no banco e guarda na variavel loja
     const loja = await ListaLojasRepository.findOne(request.params.id);
 
     const erroPadrao = [{

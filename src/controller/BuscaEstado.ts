@@ -5,10 +5,10 @@ import { ListaLojas } from "../entity/ListaLojas"
 
 export async function BuscaEstado(request: Request, response: Response) {
 
-    // get a post repository to perform operations with post
+    //Cria uma conexão com o banco
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
 
-    // load a post by a given post id
+    //Procurando no banco de dados e guardando dentro da variavel
     const loja = await ListaLojasRepository.find({
         where: {
             estado: request.params.estado
@@ -18,7 +18,7 @@ export async function BuscaEstado(request: Request, response: Response) {
         "errorCode": "400",
         "msg": "Erro na requisição, lojas inexistentes, verifique os dados e tente novamente."
     }]
-    // if post was not found return 404 to the client
+     //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (loja.length == 0) {
         response.status(404).json(erroPadrao);
         response.end();

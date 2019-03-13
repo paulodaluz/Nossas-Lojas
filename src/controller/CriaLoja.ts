@@ -5,10 +5,10 @@ import { ListaLojas} from "../entity/ListaLojas";
 
 export async function CriaLoja(request: Request, response: Response) {
     
-    // get a post repository to perform operations with post
+    //Cria uma conexão com o banco
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
 
-    // create a real post object from post json object sent over http
+    //Criando uma entidade(tipo uma tabela no banco) com o que foi recebido no boddy
     const loja = ListaLojasRepository.create(request.body);
     const erroPadrao = [{
         "errorCode": "400",
@@ -16,12 +16,13 @@ export async function CriaLoja(request: Request, response: Response) {
     }]
     //Salva a loja recebida
     await ListaLojasRepository.save(loja);
+
     if (loja.length == 0) {
         response.status(404).json(erroPadrao);
         response.end();
         return;
     }
-    // retorna a loja criada ao usuário
+    //Retorna a loja criada ao usuário
     response.send(loja);
     console.log("Loja criada com sucesso");
 }

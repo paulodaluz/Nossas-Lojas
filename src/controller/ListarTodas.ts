@@ -5,17 +5,17 @@ import { ListaLojas} from "../entity/ListaLojas";
 
 export async function ListarTodas(request: Request, response: Response) {
 
-    // get a post repository to perform operations with post
+    //Cria uma conexão com o banco
     const postRepository = getManager().getRepository(ListaLojas);
 
-    // load a post by a given post id
+    //Encontra todas as lojas e guarda na variavel loja
     const loja = await postRepository.find();
 
     const erroPadrao = [{
         "errorCode": "200",
         "msg": "Nenhuma loja cadastrada até o momento."
     }]
-    //se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
+    //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (loja.length == 0) {
         response.status(404).json(erroPadrao);
         response.end();

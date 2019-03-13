@@ -5,16 +5,15 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {AppRoutes} from "./rotas";
 
-// create connection with database
-// note that it's not active database connection
-// TypeORM creates connection pools and uses them for your requests
+// Criando uma conexão com o banco de dados
+// TypeORM criando uma conexão pools e usando quando tem pedidos
 createConnection().then(async connection => {
 
-    // create express app
+    // create express e importando a função
     const app = express();
     app.use(bodyParser.json());
 
-    // register all application routes
+    //Registra todas as conexôes apartir de um forEatch
     AppRoutes.forEach(route => {
         app[route.method](route.path, (request: Request, response: Response, next: Function) => {
             route.action(request, response)

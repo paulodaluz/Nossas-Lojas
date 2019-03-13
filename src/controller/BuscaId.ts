@@ -5,17 +5,17 @@ import { ListaLojas} from "../entity/ListaLojas"
 
 export async function BuscaId(request: Request, response: Response) {
 
-    // get a post repository to perform operations with post
+    //Cria uma conexão com o banco
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
 
-    // load a post by a given post id
+    //Procurando no banco de dados e guardando dentro da variavel
     const loja = await ListaLojasRepository.findOne(request.params.id);
 
     const erroPadrao = [{
         "errorCode": "400",
         "msg": "Erro na requisição, loja inexistente, verifique os dados e tente novamente."
     }]
-    // if post was not found return 404 to the client
+     //Caso ocorra algum erro irá retornar o erro padrão para o usuário
     if (!loja) {
         response.status(404).json(erroPadrao);
         response.end();
