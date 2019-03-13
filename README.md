@@ -14,13 +14,14 @@ Programa que guarda informações de lojas físicas de um e-commerce. Guarda inf
  
  Após clonar o [repositório](https://github.com/paulodaluz/Nossas-Lojas.git), você deve abrir a pasta no terminal e executar o comando "npm install" para instalar todos os pacotes(bibliotecas) usadas  na produção da aplicação.
  
+ #### (Caso o banco de dados não crie automáticamente uma tabela faça os seguintes passos)
  Em seu banco de dados(MySQL) voce deve criar uma database da seguinte forma:
  
  ```
  CREATE DATABASE XXXXXXXXXXXXX;
  USE XXXXXXXXXXXXX;
  ```
- No lugar de ```XXXXXXXXXXXXX``` você deve color o nome da sua database e no campo abaixo você deve colocar o nome escolhido em cima novamente.
+ No lugar de ```XXXXXXXXXXXXX``` você deve colocar o nome da sua database e no campo abaixo você deve colocar o nome escolhido em cima novamente.
  ```Obs:Em meu exemplo usei "lojas" como nome da database.```
  
  Após isso você devera criar uma tabela da seguinte forma:
@@ -158,28 +159,10 @@ E você irá perceber que retornou no Body as informações da(s) loja(s) cujo o
 E você irá perceber que retornou no Body todas as lojas cadastradas no banco de dados.
    
    
-  
   Caso queira ver minha ```Collection``` no ```Postman``` é só clicar [aqui](https://www.getpostman.com/collections/23eb7722c81005614987).
   
   ###Complemento
-  - Clicando [aqui](AAAAAAAAAAAAAAAAAAAAAAA), você poderá ver a imagem do NodeJs no DockerHub sendo executada no servidor.
+  - Clicando [aqui](https://cloud.docker.com/u/paulera25/repository/docker/paulera25/ecommerce), você poderá ver a imagem do NodeJs no DockerHub sendo executada no servidor.
   - Caso queria ver a documentação deste projeto em uma API no Swagger, basta apenas baixar o arquivo ```swagger-Paulo.yaml``` disponivel em [meu repositório](https://github.com/paulodaluz/Nossas-Lojas.git) no GitHub e importa-lo no site do [Swagger](https://editor.swagger.io/).
   
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
