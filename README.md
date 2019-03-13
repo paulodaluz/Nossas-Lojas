@@ -1,4 +1,4 @@
-# Nossas Lojas 
+# Nossas Lojas v2.0
 
 Programa que guarda informações de lojas físicas de um e-commerce. Guarda informações como id das lojas, nome, endereço, telefone/celular, CNPJ, horário de trabalho, cidade onde se localiza e estado. 
 
@@ -112,7 +112,6 @@ module.exports = function () {
  Assim que você atualizar seu banco de dados ira ver que sua tabela foi atualizada com sucesso!
 
  ### Deleta Loja
- 
  Para deletar uma loja, você irá selecionar o método ```DELETE``` no ```Postman``` e deverá:
  - Inserir a URL: http://localhost:3000/deletaLoja/{id} passando o ```ID``` da loja que deseja deletar no lugar de ```{id}```;
  - Na aba Headers você deverá usar ```Content-Type```.
@@ -130,22 +129,35 @@ module.exports = function () {
  
  ### Busca por Estado
  Para buscar uma loja pelo ```estado```, você deverá selecionar o método ```GET``` no ```Postman``` e deverá:
+ - Inserir a URL: http://localhost:3000/buscaEstado/{estado} passando o ```Estado``` da loja que deseja buscar, no lugar de ```{estado}```.
+ - Na aba Headers você deverá usar ```Content-Type```;
  
- 
- 
- 
+ E você irá perceber que retornou no Body as informações da loja cujo o ```Estado``` correspondente ao que foi passado.
  
  
  ### Busca por Estado e até Três Cidades
  Para buscar uma loja pelo ```estado``` e ```cidade```, você deverá selecionar o método ```GET``` no ```Postman``` e deverá:
   - Na aba Headers você deverá usar ```Content-Type```;
+  
  #### Caso queira pesquisar apenas por um estado e UMA cidade deverá:
-  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar no lugar de ```{estado}``` e de ```{cidadeA}```;
+  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar, no lugar de ```{estado}``` e de ```{cidadeA}```;
+  
  #### Caso queira pesquisar por um estado e DUAS cidades deverá:
-  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA}/{cidadeB} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar no lugar de ```{estado}```,```{cidadeA}```(passando a primeira cidade) e ```{cidadeB}```(passando a segunda cidade);
+  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA}/{cidadeB} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar, no lugar de ```{estado}```,```{cidadeA}```(passando a primeira cidade) e ```{cidadeB}```(passando a segunda cidade);
+  
  #### Caso queira pesquisar por um estado e TRÊS cidades deverá:
-  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA}/{cidadeB}/{cidadeC} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar no lugar de ```{estado}```,```{cidadeA}```(passando a primeira cidade) e ```{cidadeB}```(passando a segunda cidade) e ```{cidadeC}```(passando a terceira cidade).  
-
+  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA}/{cidadeB}/{cidadeC} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar, no lugar de ```{estado}```,```{cidadeA}```(passando a primeira cidade) e ```{cidadeB}```(passando a segunda cidade) e ```{cidadeC}```(passando a terceira cidade).  
+  
+E você irá perceber que retornou no Body as informações da(s) loja(s) cujo o ```Estado``` e a(s) ```Cidades``` correspondentes ao que foi passado.
+  
+  
+  ### Listar Todas as Lojas:
+  Para listar todas as lojas, você deverá selecionar o método ```GET``` no ```Postman``` e deverá:
+   - Inserir a URL: http://localhost:3000/listaLojas .
+   
+E você irá perceber que retornou no Body todas as lojas cadastradas no banco de dados.
+   
+   
   
   Caso queira ver minha ```Collection``` no ```Postman``` é só clicar [aqui](https://www.getpostman.com/collections/23eb7722c81005614987).
   
