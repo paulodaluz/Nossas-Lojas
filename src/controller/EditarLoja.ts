@@ -16,14 +16,14 @@ export async function EditaLoja(request: Request, response: Response) {
         "errorCode": "400",
         "msg": "Erro na requisição, loja inexistente, verifique os dados e tente novamente."
     }]
-    // if post was not found return 404 to the client
+    //Se loja não for encontrada irá retornar o erro padrão ao usuário
     if (!loja) {
         response.status(404).json(erroPadrao);
         response.end();
         return;
     }
 
-    // return loaded post
+    //Retorna a loja atualizada para o usuário
     response.send(request.body);
     console.log("Loja atualizada com sucesso");
 }

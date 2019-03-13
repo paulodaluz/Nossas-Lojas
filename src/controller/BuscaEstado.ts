@@ -2,9 +2,7 @@ import { Request, Response } from "express";
 import { getManager } from "typeorm";
 import { ListaLojas } from "../entity/ListaLojas"
 
-/**
- * Loads post by a given id.
- */
+
 export async function BuscaEstado(request: Request, response: Response) {
 
     // get a post repository to perform operations with post
@@ -27,6 +25,6 @@ export async function BuscaEstado(request: Request, response: Response) {
         return;
     }
 
-    // return loaded post
+    //Retorna as lojas do estado solicitado ao usuário
     response.send(loja);
 }

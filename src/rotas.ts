@@ -8,9 +8,7 @@ import { BuscaEmUmaCidade } from "./controller/BuscaEmUmaCidade";
 import { BuscaEmDuasCidades } from "./controller/BuscaEmDuasCidades";
 import { BuscaEmTresCidades } from "./controller/BuscaEmTresCidades";
 
-/**
- * All application routes.
- */
+//Todas as rotas da aplicação
 export const AppRoutes = [
     {
         path: "/criaLoja",

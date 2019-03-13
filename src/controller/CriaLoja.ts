@@ -2,9 +2,7 @@ import {Request, Response} from "express";
 import {getManager} from "typeorm";
 import { ListaLojas} from "../entity/ListaLojas";
 
-/**
- * Saves given post.
- */
+
 export async function CriaLoja(request: Request, response: Response) {
     
     // get a post repository to perform operations with post
@@ -16,14 +14,14 @@ export async function CriaLoja(request: Request, response: Response) {
         "errorCode": "400",
         "msg": "Erro ao criar a loja, verifique os dados e tente novamente"
     }]
-    // save received post
+    //Salva a loja recebida
     await ListaLojasRepository.save(loja);
     if (loja.length == 0) {
         response.status(404).json(erroPadrao);
         response.end();
         return;
     }
-    // return saved post back
+    // retorna a loja criada ao usuário
     response.send(loja);
     console.log("Loja criada com sucesso");
 }

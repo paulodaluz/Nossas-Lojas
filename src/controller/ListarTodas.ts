@@ -2,9 +2,7 @@ import {Request, Response} from "express";
 import {getManager} from "typeorm";
 import { ListaLojas} from "../entity/ListaLojas";
 
-/**
- * Loads all posts from the database.
- */
+
 export async function ListarTodas(request: Request, response: Response) {
 
     // get a post repository to perform operations with post
@@ -14,15 +12,15 @@ export async function ListarTodas(request: Request, response: Response) {
     const loja = await postRepository.find();
 
     const erroPadrao = [{
-        "errorCode": "400",
+        "errorCode": "200",
         "msg": "Nenhuma loja cadastrada até o momento."
     }]
-    // if post was not found return 404 to the client
+    //se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (loja.length == 0) {
         response.status(404).json(erroPadrao);
         response.end();
         return;
     }
-    // return loaded posts
+    //Retorna as lojas para o usuário
     response.send(loja);
 }

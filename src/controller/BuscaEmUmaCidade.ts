@@ -2,9 +2,7 @@ import { Request, Response } from "express";
 import { getManager } from "typeorm";
 import { ListaLojas } from "../entity/ListaLojas"
 
-/**
- * Loads post by a given id.
- */
+
 export async function BuscaEmUmaCidade(request: Request, response: Response) {
 
     // get a post repository to perform operations with post
@@ -23,13 +21,13 @@ export async function BuscaEmUmaCidade(request: Request, response: Response) {
         "errorCode": "400",
         "msg": "Erro na requisição, loja inexistente, verifique os dados e tente novamente."
     }]
-    // if post was not found return 404 to the client
+    //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (loja.length == 0) {
         response.status(404).json(erroPadrao);
         response.end();
         return;
     }
 
-    // return loaded post
+    // Retorna as lojas ao usuário
     response.send(loja);
 }
