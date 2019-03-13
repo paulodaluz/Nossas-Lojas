@@ -13,6 +13,7 @@ export async function BuscaEmUmaCidade(request: Request, response: Response) {
     // load a post by a given post id
     const loja = await ListaLojasRepository.find({
         where: {
+
             estado: request.params.estado,
             cidade: request.params.cidadeA
         }

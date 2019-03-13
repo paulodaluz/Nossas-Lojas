@@ -25,4 +25,5 @@ export async function EditaLoja(request: Request, response: Response) {
 
     // return loaded post
     response.send(request.body);
+    console.log("Loja atualizada com sucesso");
 }
