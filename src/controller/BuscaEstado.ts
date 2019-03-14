@@ -19,7 +19,7 @@ export async function BuscaEstado(request: Request, response: Response) {
         "msg": "Erro na requisição, lojas inexistentes, verifique os dados e tente novamente."
     }]
      //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
-    if (loja.length == 0) {
+    if (!loja.length) {
         response.status(404).json(erroPadrao);
         response.end();
         return;

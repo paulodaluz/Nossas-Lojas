@@ -23,7 +23,7 @@ export async function BuscaEmTresCidades(request: Request, response: Response) {
         "msg": "Erro na requisição, lojas inexistentes, verifique os dados e tente novamente."
     }]
     //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
-    if (loja.length == 0) {
+    if (!loja.length) {//ISSO RETORNA TRUE OU FALSE
         response.status(404).json(erroPadrao);
         response.end();
         return;

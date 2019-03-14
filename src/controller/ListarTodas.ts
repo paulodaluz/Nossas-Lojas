@@ -16,7 +16,7 @@ export async function ListarTodas(request: Request, response: Response) {
         "msg": "Nenhuma loja cadastrada até o momento."
     }]
     //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
-    if (loja.length == 0) {
+    if (!loja.length) {
         response.status(404).json(erroPadrao);
         response.end();
         return;

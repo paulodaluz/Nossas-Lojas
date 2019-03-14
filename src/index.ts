@@ -3,16 +3,19 @@ import {createConnection} from "typeorm";
 import {Request, Response} from "express";
 import * as express from "express";
 import * as bodyParser from "body-parser";
+import * as swaggerUi from 'swagger-ui-express';
 import {AppRoutes} from "./rotas";
 
+//Conectando ao Swagger e guardando em uma váriavel
+const swaggerDocument = require('../Documentação/swagger.json');
 // Criando uma conexão com o banco de dados
-// TypeORM criando uma conexão pools e usando quando tem pedidos
 createConnection().then(async connection => {
 
     // create express e importando a função
     const app = express();
     app.use(bodyParser.json());
-
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    
     //Registra todas as conexôes apartir de um forEatch
     AppRoutes.forEach(route => {
         app[route.method](route.path, (request: Request, response: Response, next: Function) => {
