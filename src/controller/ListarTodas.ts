@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {getManager} from "typeorm";
 import { ListaLojas} from "../entity/ListaLojas";
-
+import { MensagemPadrao } from "../models/MensagemPadrao";
 
 export async function ListarTodas(request: Request, response: Response) {
 
@@ -11,13 +11,9 @@ export async function ListarTodas(request: Request, response: Response) {
     //Encontra todas as lojas e guarda na variavel loja
     const loja = await postRepository.find();
 
-    const erroPadrao = [{
-        "errorCode": "200",
-        "msg": "Nenhuma loja cadastrada até o momento."
-    }]
     //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (!loja.length) {
-        response.status(404).json(erroPadrao);
+        response.status(404).json(new MensagemPadrao("204", "Nenhuma loja foi encontrada, verifique os dados e tente novamente."));
         response.end();
         return;
     }

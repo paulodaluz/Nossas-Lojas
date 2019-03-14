@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import { getManager } from "typeorm";
 import { ListaLojas } from "../entity/ListaLojas"
+import { MensagemPadrao } from "../models/MensagemPadrao"
 
+
+const erro = MensagemPadrao
 
 export async function BuscaEmTresCidades(request: Request, response: Response) {
 
@@ -18,13 +21,9 @@ export async function BuscaEmTresCidades(request: Request, response: Response) {
         ]
     });
 
-    const erroPadrao = [{
-        "errorCode": "400",
-        "msg": "Erro na requisição, lojas inexistentes, verifique os dados e tente novamente."
-    }]
     //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (!loja.length) {//ISSO RETORNA TRUE OU FALSE
-        response.status(404).json(erroPadrao);
+        response.status(404).json(new MensagemPadrao("204", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
         response.end();
         return;
     }

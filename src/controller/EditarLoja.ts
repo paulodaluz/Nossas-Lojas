@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getManager } from "typeorm";
-import { ListaLojas } from "../entity/ListaLojas"
-
+import { ListaLojas } from "../entity/ListaLojas";
+import { MensagemPadrao } from "../models/MensagemPadrao";
 
 export async function EditaLoja(request: Request, response: Response) {
 
@@ -13,13 +13,9 @@ export async function EditaLoja(request: Request, response: Response) {
     //Atualiza loja
     await ListaLojasRepository.update({ id: request.params.id }, request.body);
 
-    const erroPadrao = [{
-        "errorCode": "400",
-        "msg": "Erro na requisição, loja inexistente, verifique os dados e tente novamente."
-    }]
     //Se loja não for encontrada irá retornar o erro padrão ao usuário
     if (!loja) {
-        response.status(404).json(erroPadrao);
+        response.status(404).json(new MensagemPadrao("400", "Não foi possivel editar a loja, verifique os dados e tente novamente.").erroRetorno());
         response.end();
         return;
     }

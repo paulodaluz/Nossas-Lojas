@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { getManager } from "typeorm";
-import { ListaLojas } from "../entity/ListaLojas"
+import { ListaLojas } from "../entity/ListaLojas";
+import { MensagemPadrao } from "../models/MensagemPadrao";
+
 
 
 export async function BuscaEmUmaCidade(request: Request, response: Response) {
@@ -17,13 +19,9 @@ export async function BuscaEmUmaCidade(request: Request, response: Response) {
         }
     });
 
-    const erroPadrao = [{
-        "errorCode": "400",
-        "msg": "Erro na requisição, loja inexistente, verifique os dados e tente novamente."
-    }]
     //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (!loja.length) {
-        response.status(404).json(erroPadrao);
+        response.status(404).json(new MensagemPadrao("204", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
         response.end();
         return;
     }

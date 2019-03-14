@@ -15,6 +15,7 @@ createConnection().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
     
     //Registra todas as conexôes apartir de um forEatch
     AppRoutes.forEach(route => {
@@ -25,9 +26,15 @@ createConnection().then(async connection => {
         });
     });
 
+    //Diz para a pessoa que a página não existe quando entra em uma pagina inexistente
+
     //porta onde está rodando
     app.listen(3000);
 
     console.log("API do express está funcionando na porta 3000");
+
+    app.use((req, res) => {
+        res.status(404).json({ errorCode: 404, msg: 'Pagina não encontrada!' });
+    });
 
 }).catch(error => console.log("TypeORM connection error: ", error));
