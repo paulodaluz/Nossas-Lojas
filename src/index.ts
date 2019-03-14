@@ -26,13 +26,14 @@ createConnection().then(async connection => {
         });
     });
 
-    //Diz para a pessoa que a página não existe quando entra em uma pagina inexistente
 
-    //porta onde está rodando
+    //porta onde está rodando a aplicação
     app.listen(3000);
 
-    console.log("API do express está funcionando na porta 3000");
+    console.log();
+    console.log("A API do express está funcionando na porta 3000");
 
+    //Diz para a pessoa que a página não existe quando entra em uma pagina inexistente
     app.use((req, res) => {
         res.status(404).json({ errorCode: 404, msg: 'Pagina não encontrada!' });
     });
