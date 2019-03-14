@@ -6,16 +6,24 @@ import * as bodyParser from "body-parser";
 import * as swaggerUi from 'swagger-ui-express';
 import {AppRoutes} from "./rotas";
 
+
+//Conectando ao Express para fazer a validação mais pra frente
+var expressValidator = require('express-validator');
+
 //Conectando ao Swagger e guardando em uma váriavel
 const swaggerDocument = require('../Documentação/swagger.json');
-// Criando uma conexão com o banco de dados
+
+//Criando uma conexão com o banco de dados
 createConnection().then(async connection => {
 
-    // create express e importando a função
+    //Criando o express e importando a função
+    //Usando o body parser
+    //Usando o Swagger na url, abrindo o arquivo...
+    //Validando as informações para criar a loja
     const app = express();
     app.use(bodyParser.json());
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+    app.use(expressValidator());
     
     //Registra todas as conexôes apartir de um forEatch
     AppRoutes.forEach(route => {
