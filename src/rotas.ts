@@ -1,13 +1,7 @@
-import { CriaLoja } from "./controller/CriaLoja";
-import { EditaLoja } from "./controller/EditarLoja";
-import { DeletaLoja } from "./controller/DeletaLoja";
-import { BuscaId } from "./controller/BuscaId";
-import { BuscaEstado } from "./controller/BuscaEstado";
-import { ListarTodas } from "./controller/ListarTodas";
-import { BuscaEmUmaCidade } from "./controller/BuscaEmUmaCidade";
-import { BuscaEmDuasCidades } from "./controller/BuscaEmDuasCidades";
-import { BuscaEmTresCidades } from "./controller/BuscaEmTresCidades";
-import { Redireciona } from "./controller/Redireciona"
+import { CriaLoja, EditaLoja, DeletaLoja, BuscaPorId} from "./controller/Controler";
+import { BuscaPorEstado, BuscaEmUmaCidade, BuscaEmDuasCidades, BuscaEmTresCidades } from "./controller/Controler";
+import { ListarTodas, Redireciona } from "./controller/Controler";
+
 
 //Todas as rotas da aplicação
 export const AppRoutes = [
@@ -27,29 +21,29 @@ export const AppRoutes = [
         action: DeletaLoja
     },
     {
-        path: "/buscaId/:id",
+        path: "/buscaPorId/:id",
         method: "get",
-        action: BuscaId
+        action: BuscaPorId
     },
     {
-        path: "/buscaEstadoeCidade/:estado/:cidadeA",
+        path: "/buscaPorEstado/:estado",
+        method: "get",
+        action: BuscaPorEstado
+    },
+    {
+        path: "/buscaPorEstadoeCidade/:estado/:cidadeA",
         method: "get",
         action: BuscaEmUmaCidade
     },
     {
-        path: "/buscaEstadoeCidade/:estado/:cidadeA/:cidadeB",
+        path: "/buscaPorEstadoeCidade/:estado/:cidadeA/:cidadeB",
         method: "get",
         action: BuscaEmDuasCidades
     },
     {
-        path: "/buscaEstadoeCidade/:estado/:cidadeA/:cidadeB/:cidadeC",
+        path: "/buscaPorEstadoeCidade/:estado/:cidadeA/:cidadeB/:cidadeC",
         method: "get",
         action: BuscaEmTresCidades
-    },
-    {
-        path: "/buscaEstado/:estado",
-        method: "get",
-        action: BuscaEstado
     },
     {
         path: "/listaLojas",

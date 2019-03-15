@@ -19,6 +19,6 @@ export class validacao {
         return erros;
     }
 
-    return null
+    return null;
     }
 }
