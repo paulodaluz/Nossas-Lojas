@@ -11,7 +11,7 @@ export class validacao {
     request.assert("cnpj", "CNPJ da loja é obrigatório e deve conter 18 caracteres, incluindo (´.´ e ´-´).").notEmpty().isLength({ min: 18, max: 18 });
     request.assert("horarioDeTrabalho", "Horário de trabalho é obrigatório").notEmpty();
     request.assert("cidade", "Cidade é obrigatória.").notEmpty().isLength({ min: 3 });
-    request.assert("estado", "Estado é obrigatório e deve ter 2 caracteres").notEmpty().isLength({ min: 1, max: 2 });
+    request.assert("estado", "Estado é obrigatório e deve ter 2 caracteres").notEmpty().isLength({ min: 2, max: 2 });
 
     var erros = request.validationErrors();
 

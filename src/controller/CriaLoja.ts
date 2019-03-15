@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 import {getManager} from "typeorm";
 import { ListaLojas} from "../entity/ListaLojas";
 import { } from "express-validator"
-import { validacao } from "../models/Validacao"
+import { validacao } from "../models/Validacao";
 
 export async function CriaLoja(request: Request, response: Response) {
     

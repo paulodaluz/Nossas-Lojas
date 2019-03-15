@@ -2,12 +2,23 @@ import { Request, Response } from "express";
 import { getManager } from "typeorm";
 import { ListaLojas } from "../entity/ListaLojas";
 import { MensagemPadrao } from "../models/MensagemPadrao";
+import { validacao } from "../models/Validacao";
 
 export async function EditaLoja(request: Request, response: Response) {
 
     //Cria uma conexão com o banco
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
 
+    //Pega a função validacao e os erros que ela retorna e guarda na variavel erros
+    var errors = new validacao().validaInformacoes(request);
+
+    //Se tiver erros retorna eles para o usuário
+    if (errors) {
+        console.log("Erros de validação encontrados");
+        response.status(400).json(errors);
+        return;
+    };
+    
     //Encontra a loja e guarda ela na variavel loja
     const loja = await ListaLojasRepository.findOne(request.params.id);
     //Atualiza loja
