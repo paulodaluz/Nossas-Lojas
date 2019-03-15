@@ -7,6 +7,7 @@ import { ListarTodas } from "./controller/ListarTodas";
 import { BuscaEmUmaCidade } from "./controller/BuscaEmUmaCidade";
 import { BuscaEmDuasCidades } from "./controller/BuscaEmDuasCidades";
 import { BuscaEmTresCidades } from "./controller/BuscaEmTresCidades";
+import { Redireciona } from "./controller/Redireciona"
 
 //Todas as rotas da aplicação
 export const AppRoutes = [
@@ -14,7 +15,6 @@ export const AppRoutes = [
         path: "/criaLoja",
         method: "post",
         action: CriaLoja
-
     },
     {
         path: "/editaLoja/:id",
@@ -55,6 +55,11 @@ export const AppRoutes = [
         path: "/listaLojas",
         method: "get",
         action: ListarTodas
+    },
+    {
+        path: "/",
+        method: "get",
+        action: Redireciona
     }
 
 ];

@@ -13,7 +13,7 @@ export async function BuscaId(request: Request, response: Response) {
 
      //Caso ocorra algum erro irá retornar o erro padrão para o usuário
     if (!loja) {
-        response.status(200).json(new MensagemPadrao("204", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
+        response.status(204).json(new MensagemPadrao("204", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
         response.end();
         return;
     }

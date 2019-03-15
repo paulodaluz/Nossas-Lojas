@@ -18,7 +18,7 @@ export async function BuscaEstado(request: Request, response: Response) {
 
      //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (!loja.length) {
-        response.status(404).json(new MensagemPadrao("204", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
+        response.status(204).json(new MensagemPadrao("204", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
         response.end();
         return;
     }
