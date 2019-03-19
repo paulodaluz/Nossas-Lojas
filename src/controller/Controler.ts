@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getManager } from "typeorm";
+import { getManager, In } from "typeorm";
 import { ListaLojas } from "../entity/ListaLojas";
 import { } from "express-validator";
 import { MensagemPadrao } from "../models/MensagemPadrao";
@@ -132,33 +132,7 @@ export async function BuscaPorEstado(request: Request, response: Response) {
 };
 
 
-export async function BuscaEmUmaCidade(request: Request, response: Response) {
-
-    //Cria uma conexão com o banco
-    const ListaLojasRepository = getManager().getRepository(ListaLojas);
-
-    //Procurando no banco de dados e guardando dentro da variavel
-    const loja = await ListaLojasRepository.find({
-        where: {
-
-            estado: request.params.estado,
-            cidade: request.params.cidadeA
-        }
-    });
-
-    //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
-    if (!loja.length) {
-        response.status(404).json(new MensagemPadrao("404", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
-        response.end();
-        return;
-    }
-
-    // Retorna as lojas ao usuário
-    response.send(loja);
-};
-
-
-export async function BuscaEmDuasCidades(request: Request, response: Response) {
+export async function BuscaPorCidades(request: Request, response: Response) {
 
     //Cria uma conexão com o banco
     const ListaLojasRepository = getManager().getRepository(ListaLojas);
@@ -166,40 +140,13 @@ export async function BuscaEmDuasCidades(request: Request, response: Response) {
     //Procurando no banco de dados e guardando dentro da variavel
     const loja = await ListaLojasRepository.find({
         where: [
-            { estado: request.params.estado, cidade: request.params.cidadeA },
-            { estado: request.params.estado, cidade: request.params.cidadeB }
+            //Pega o estado na URL e as cidades no Body
+            {estado: request.params.estado, cidade: In(request.body.cidades) }
         ]
     });
 
     //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
     if (!loja.length) {
-        response.status(404).json(new MensagemPadrao("404", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
-        response.end();
-        return;
-    }
-
-    // Retorna as lojas ao usuário
-    response.send(loja);
-};
-
-
-export async function BuscaEmTresCidades(request: Request, response: Response) {
-
-    //Cria uma conexão com o banco
-    const ListaLojasRepository = getManager().getRepository(ListaLojas);
-
-    //Procurando no banco de dados e guardando dentro da variavel
-    const loja = await ListaLojasRepository.find({
-        where: [
-            { estado: request.params.estado, cidade: request.params.cidadeA },
-            { estado: request.params.estado, cidade: request.params.cidadeB },
-            { estado: request.params.estado, cidade: request.params.cidadeC }
-
-        ]
-    });
-
-    //Se nenhuma loja for encontrada irá retornar o erro padrão ao usuário
-    if (!loja.length) {//ISSO RETORNA TRUE OU FALSE
         response.status(404).json(new MensagemPadrao("404", "Nenhuma loja foi encontrada, verifique os dados e tente novamente.").erroRetorno());
         response.end();
         return;

@@ -7,17 +7,17 @@
   "database": "lojas",
   "synchronize": false,
   "entities": [
-    "src/entity/*.js"
+    "js/entity/*.js"
   ],
   "subscribers": [
-    "src/subscriber/*.js"
+    "js/subscriber/*.js"
   ],
   "migrations": [
-    "src/migration/*.js"
+    "js/migration/*.js"
   ],
   "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migration",
-    "subscribersDir": "src/subscriber"
+    "entitiesDir": "js/entity",
+    "migrationsDir": "js/migration",
+    "subscribersDir": "js/subscriber"
   }
 }

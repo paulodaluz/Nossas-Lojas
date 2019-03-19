@@ -11,7 +11,7 @@ import {AppRoutes} from "./rotas";
 var expressValidator = require('express-validator');
 
 //Conectando ao Swagger e guardando em uma váriavel
-const swaggerDocument = require('../Documentação/swagger.json');
+const swaggerDocument = require('../Documentacao/swagger.json');
 
 //Criando uma conexão com o banco de dados
 createConnection().then(async connection => {

@@ -1,48 +1,48 @@
-import { CriaLoja, EditaLoja, DeletaLoja, BuscaPorId} from "./controller/Controler";
-import { BuscaPorEstado, BuscaPorCidades, ListarTodas, Redireciona } from "./controller/Controler";
-
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Controler_1 = require("./controller/Controler");
+const Controler_2 = require("./controller/Controler");
 //Todas as rotas da aplicação
-export const AppRoutes = [
+exports.AppRoutes = [
     {
         path: "/criaLoja",
         method: "post",
-        action: CriaLoja
+        action: Controler_1.CriaLoja
     },
     {
         path: "/editaLoja/:id",
         method: "put",
-        action: EditaLoja
+        action: Controler_1.EditaLoja
     },
     {
         path: "/deletaLoja/:id",
         method: "delete",
-        action: DeletaLoja
+        action: Controler_1.DeletaLoja
     },
     {
         path: "/buscaPorId/:id",
         method: "get",
-        action: BuscaPorId
+        action: Controler_1.BuscaPorId
     },
     {
         path: "/buscaPorEstado/:estado",
         method: "get",
-        action: BuscaPorEstado
+        action: Controler_2.BuscaPorEstado
     },
     {
         path: "/buscaPorCidades/:estado",
         method: "get",
-        action: BuscaPorCidades
+        action: Controler_2.BuscaPorCidades
     },
     {
         path: "/listaLojas",
         method: "get",
-        action: ListarTodas
+        action: Controler_2.ListarTodas
     },
     {
         path: "/",
         method: "get",
-        action: Redireciona
+        action: Controler_2.Redireciona
     }
-
 ];
+//# sourceMappingURL=rotas.js.map

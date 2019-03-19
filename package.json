@@ -41,7 +41,7 @@
   },
   "scripts": {
     "watch": "tsc -w",
-    "server": "nodemon src/index.js",
+    "server": "nodemon js/index.js",
     "start": "concurrently \"npm run watch\" \"npm run server\""
   }
 }
