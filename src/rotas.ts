@@ -31,7 +31,7 @@ export const AppRoutes = [
     },
     {
         path: "/buscaPorCidades/:estado",
-        method: "get",
+        method: "post",
         action: BuscaPorCidades
     },
     {
