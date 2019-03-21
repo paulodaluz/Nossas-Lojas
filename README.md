@@ -136,19 +136,20 @@ module.exports = function () {
  E você irá perceber que retornou no Body as informações da loja cujo o ```Estado``` correspondente ao que foi passado.
  
  
- ### Busca por Estado e até Três Cidades
- Para buscar uma loja pelo ```estado``` e ```cidade```, você deverá selecionar o método ```GET``` no ```Postman``` e deverá:
-  - Na aba Headers você deverá usar ```Content-Type```;
+ ### Busca por Estado e Cidades
+ Para buscar uma loja pelo ```estado``` e ```cidade```, você deverá selecionar o método ```PUT``` no ```Postman``` e deverá: 
+ - Inserir a URL: http://localhost:3000/buscaPorCidades/{estado} passando o ```Estado``` da loja que deseja pesquisar no lugar de ```{estado}```;
+ - Na aba Headers você deverá usar ```Content-Type```;
+ - Na aba ```Body``` deverá selecionar o modo ```raw``` e selecionar o ```JSON(application/json)```;
+ - E no campo abaixo você irá inserir as cidades de uma loja que deseja buscar, passando-os como no exemplo:
   
- #### Caso queira pesquisar apenas por um estado e UMA cidade deverá:
-  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar, no lugar de ```{estado}``` e de ```{cidadeA}```;
-  
- #### Caso queira pesquisar por um estado e DUAS cidades deverá:
-  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA}/{cidadeB} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar, no lugar de ```{estado}```,```{cidadeA}```(passando a primeira cidade) e ```{cidadeB}```(passando a segunda cidade);
-  
- #### Caso queira pesquisar por um estado e TRÊS cidades deverá:
-  - Inserir a URL: http://localhost:3000/buscaEstadoeCidade/{estado}/{cidadeA}/{cidadeB}/{cidadeC} passando o ```Estado``` e a ```Cidade``` da loja que deseja buscar, no lugar de ```{estado}```,```{cidadeA}```(passando a primeira cidade) e ```{cidadeB}```(passando a segunda cidade) e ```{cidadeC}```(passando a terceira cidade).  
-  
+  ```
+  {
+"cidades" : [
+"BRASIL", "Passo Fundo", "Carazinho", "Marau", "America"
+]
+}
+  ```
 E você irá perceber que retornou no Body as informações da(s) loja(s) cujo o ```Estado``` e a(s) ```Cidades``` correspondentes ao que foi passado.
   
   
